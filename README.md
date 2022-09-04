@@ -28,6 +28,8 @@ This is the [task](TASK.md).
     java -jar dota-challenge-<application-version>.jar
 </code>
 
+* Alternatively if you need to run via IDE, simply run the DotaChallengeApplication class.
+
 ## Testing the application
 * Boot up the application is mentioned above
 * Import the Postman Local environment setup file found [here](/postman/bayes-local-env.postman_environment.json)
