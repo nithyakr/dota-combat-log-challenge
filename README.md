@@ -25,7 +25,7 @@ This is the [task](TASK.md).
 * Execute the following command to run the Application (replace the version with the current application version)
 
 <code>
-    java -jar dota-challenge-<application-version>.jar
+    java -jar dota-challenge-[version].jar
 </code>
 
 * Alternatively if you need to run via IDE, simply run the DotaChallengeApplication class.
