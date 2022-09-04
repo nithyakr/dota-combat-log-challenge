@@ -2,6 +2,13 @@
 
 This is the [task](TASK.md).
 
+## Additional Dependencies
+### GSON - Apache 2.0 License
+* Gson Library is added to de-serialize the Json String response from the Mock MVC into POJO classes in the Integration tests. 
+* Initially planned to limit the maven dependency to test scope `<scope>test</scope>`
+* But since the HeroDamage Class contains special Json Property names defined with Jackson library's @JsonProperty Annotation, Gson was not able to map the value to the field in the POJO class
+* Due to this, the test scope was removed from the maven dependency and Gson's @SerializedName annotation is added to HeroDamage class, to help Gson to map the Json String values to the POJO class fields
+
 ## Assumptions
 
 * As noted in the [Task](/TASK.md) The non-relevant data (Item usages, Healing etc) are not processed and persisted
@@ -46,13 +53,13 @@ This is the [task](TASK.md).
 * And this can lead to Out of Memory errors if large files are uploaded
 
 #### Solution
-* Transfer remote file via FTP to the host machine of this application
+* Transfer remote files via FTP to the host machine of this application
 * Implement a Spring scheduler (or a Java File Watcher Service which will generate an event if a new file is received) to scan a particular directory of the host machine
 * The Scheduler pickes up the FTP'd files and hands them over to a new Thread to process (Let's call is File Reader Thread) with a help of an Executor Service
 * The File Reader Thread reads the file line by line using a Buffered reader and writes the content to a Blocking Queue
 * Another Thread (let's call it File Processor Thread) reads the Events from the Blocking Queue using a while loop to make it continuously running and processes them and finally persists them in to the DB
 * Once the File Reader thread finishes up the file read process, a unique object (let's call it Poison pill) is submitted into the Blocking Queue
-* Once the processor thread receives the Poison pill, it will exit from the while loop so that will not be in-definitely waiting for events
+* Once the processor thread receives the Poison pill, it will exit from the while loop so that will not be in-definite wait for events via Blocking Queue
 * Since the Blocking Queue is introduced, the File Reader thread will get blocked if the queue is full (Will save the Application Memory) and the processor thread will get blocked if the Queue is empty (Will save the CPU from unnecessary processes)
 * This design will prevent the Application Memory being Overloaded with File contents and will save the application from Out Of Memory errors
 
