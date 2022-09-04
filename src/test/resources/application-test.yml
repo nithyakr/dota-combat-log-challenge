@@ -1,0 +1,18 @@
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:dota-test
+    username: sa
+    password: password
+
+bayes:
+  dota:
+    damage-done-event-format: \[([0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3})] npc_dota_hero_([0-9a-zA-Z_]+) hits npc_dota_hero_([0-9a-zA-Z_]+) with ([0-9a-zA-Z_]+) for ([0-9]+) damage \([^)]*\)
+    hero-killed-event-format: \[([0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3})] npc_dota_hero_([0-9a-zA-Z_]+) is killed by npc_dota_hero_([0-9a-zA-Z_]+)
+    item-purchased-event-format: \[([0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3})] npc_dota_hero_([0-9a-zA-Z_]+) buys item item_([0-9a-zA-Z_]+)
+    spell-cast-event-format: \[([0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3})] npc_dota_hero_([0-9a-zA-Z_]+) casts ability ([0-9a-zA-Z_]+) \(lvl ([0-9]+)\) on ([a-zA-Z_]+)
+
