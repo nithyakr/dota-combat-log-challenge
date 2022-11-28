@@ -1,6 +1,8 @@
 server:
   error.whitelabel.enabled: false
   port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /dota-bayes
 
 spring:
   mvc:

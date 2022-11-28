@@ -35,6 +35,7 @@ public class CombatLogEntryRepositoryTest {
 
     @BeforeAll
     public void setup() {
+        matchRepository.deleteAll();
         MatchEntity testEntity = TestUtility.createTestMatch();
         matchId = matchRepository.saveAndFlush(testEntity).getId();
     }
